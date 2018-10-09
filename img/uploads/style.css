@@ -1,0 +1,131 @@
+body {
+    background-color: #6c757d;
+}
+
+main {
+    background-color: #e9ecef;
+}
+
+.text-primary {
+    color: #262e75 !important;
+}
+
+.text-secondary {
+    color: #353e8e !important;
+}
+
+.page-link {
+    color: #161a3e;
+}
+
+.bg-primary {
+    background-color: #161A3E!important;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #484e8a;
+    border-color: #40446f;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
+    background-color: #2a2f5a !important;
+    border-color: #21254a;
+}
+
+.btn-secondary {
+    color: #fff;
+    background-color: #2a2f5a !important;
+    border-color: #21254a;
+}
+
+.btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active, .btn-secondary.active, .open>.dropdown-toggle.btn-secondary {
+    background-color: #161A3E !important;
+    border-color: #21254a;
+}
+
+a.card-link {
+    color: #0315b7;
+    font-weight: 600;
+}
+
+img#logo {
+    width: 70px;
+    top: 20px;
+    margin-right: 13px;
+    position: absolute;
+}
+
+p.card-text {
+    overflow: hidden;
+    max-height: 169px;
+}
+
+.pt-5, .py-5 {
+    padding-top: 1.5rem !important;
+    padding-bottom: 0rem !important;
+}
+
+img.card-img-top {
+    height: initial !important;
+}
+
+body {
+    overscroll-behavior: contain;
+}
+
+a.navbar-brand p {
+    left: 100px;
+    position: relative;
+    margin: 0;
+    width: 100%;
+}
+
+div#navbarsExampleDefault {
+    position: relative;
+    top: -8px;
+}
+
+ul.navbar-nav.mr-auto {
+    padding: 23px 0px 0px 8px;
+}
+
+.btn:focus, .btn:active {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+i.fas {
+    font-size: 20px;
+}
+
+@media (min-width: 768px) {
+
+    ul.navbar-nav.mr-auto {
+        float: right !important;
+        margin: 0 !important;
+    }
+
+    p.card-text.mid {
+        height: 140px;
+    }
+
+    .carousel-inner {
+        height: 465px !important;
+    }
+
+    h2#title_nieuws_mob {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    div#welcomemessage {
+        display: none;
+    }
+
+    h2#title_nieuws_desk {
+        display: none;
+    }
+}

@@ -1,0 +1,5 @@
+Ideeën:
+* Push nieuwe media vanuit SQL, klein bericht in de hoek
+* 360 Graden rotatie bij klik logo, stuur naar home
+* Bijhouden welke content er nieuw is. Het zij media (i.e. 3 nieuwe media) o.i.d.
+
