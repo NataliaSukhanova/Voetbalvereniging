@@ -68,6 +68,7 @@ p.card-text {
 
 img.card-img-top {
     height: initial !important;
+    /*max-width: initial !important;*/
 }
 
 body {
