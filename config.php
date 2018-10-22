@@ -5,6 +5,9 @@ $servername = "127.0.0.1";
 $username = "root";
 $password = "123";
 
+// Uploaded photo destination
+$UPLOADED_PHOTO_DIR = "./img/uploads/";
+
 // Make connection
 try {
 // Creates PDO connection with given variables

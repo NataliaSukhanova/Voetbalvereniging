@@ -50,30 +50,27 @@ if (isset($_FILES['user_file']['tmp_name']) && ($_FILES['user_file']['tmp_name']
 
     // add media to database
     try {
-// Prepare statement
+        // Prepare statement
         $stmt = $conn->prepare("
         INSERT INTO media 
-          (type, path, creation_date, share_status, description, title, member_id)
+          (type, path, creation_date, share_status, description, title, member_id, file_status)
         VALUES 
-          (:type, :path, now(), :share_status, :description, :title, :member_id)
+          (:type, :path, now(), :share_status, :description, :title, :member_id, 'active')
           ");
 
 
         // Create variables for parameters
 
-        //        die(var_dump($_POST));
         $type = 'photo';
-//        $creation_date = $_POST['creation_date'];
         $share_status = 'team';
         $description = $_POST['description'];
         $title = isset($_POST['title']) ? $_POST['title'] : '';
         $member_id = 2;
 
 
-        // Set variables and excecute query
+        // Set variables and execute query
         $stmt->bindParam(':type', $type);
         $stmt->bindParam(':path', $path);
-//        $stmt->bindParam(':creation_date', $creation_date);
         $stmt->bindParam(':share_status', $share_status);
         $stmt->bindParam(':description', $description);
         $stmt->bindParam(':title', $title);
@@ -83,19 +80,15 @@ if (isset($_FILES['user_file']['tmp_name']) && ($_FILES['user_file']['tmp_name']
         // get image ID
         $last_id = $conn->lastInsertId();
 
-        // file destination,
-        // filename structure:
-        //      <id>-<random-suffic>.jpg
-        //
-        $dst = './img/' . $last_id . '-' . $path . '.jpg';
+        // file destination:
+        //      <id>-<random-suffix>.jpg
+
+        $dst = $UPLOADED_PHOTO_DIR . "/" . $last_id . '-' . $path . '.jpg';
 
         //Move file
         if (!move_uploaded_file($_FILES['user_file']['tmp_name'], $dst)) {
             echo "Something went wrong. Try again!";
         }
-
-
-
 
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
@@ -107,10 +100,11 @@ if (isset($_FILES['user_file']['tmp_name']) && ($_FILES['user_file']['tmp_name']
 
 // --------------------------------------- SHOW MEDIA ----------------------------------------------------------------
 // Prepare and excecute query
-function showmembers($conn)
+function showPhotos($conn)
 {
 
-    $stmt = $conn->prepare("SELECT id, type, path, creation_date, share_status, description, title, member_id FROM media");
+    $stmt = $conn->prepare("SELECT id, type, path, creation_date, share_status, description, title, member_id, file_status FROM media 
+    WHERE file_status = 'active' ");
     $stmt->execute();
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 //    die(var_dump($results));
@@ -182,7 +176,7 @@ function showmembers($conn)
             <hr>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="frontpage.php" data-toggle="collapse" data-target="#navbarsExampleDefault"><i class="fas fa-home"></i> Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="./frontpage.php" data-toggle="collapse" data-target="#navbarsExampleDefault"><i class="fas fa-home"></i> Home <span class="sr-only">(current)</span></a>
 
                 </li>
                 <li class="nav-item">
@@ -211,15 +205,15 @@ function showmembers($conn)
         <input type="file" name="user_file" value="Upload a file"><br><br>
         <!--    проверка, отправилось ли фото на сервер-->
         <input type="hidden" name="action" value="true">
-        <input type="text" name="title" value="Title">
+        <input type="text" name="title" value="Titel">
         <br><br>
-        <textarea rows="4" cols="50" name="description">Describe your photo here...</textarea>
+        <textarea rows="4" cols="50" name="description">Beschrijf je foto...</textarea>
         <br><br>
         <input type="submit" value="Submit">
     </form>
     <br><br>
 
-    <?php showmembers($conn); ?>
+    <?php showPhotos($conn); ?>
     <!--    <!-- 16:9 aspect ratio naar VIDEO Pagina-->
     <!--    <div class="embed-responsive embed-responsive-16by9">-->
     <!--        <iframe class="embed-responsive-item" src="..."></iframe>-->
